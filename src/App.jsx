@@ -8,6 +8,7 @@ import Skills from "./components/Skills";
 import Class from "./components/Class";
 import Requirements from "./components/Requirements";
 import SkillCheck from "./components/SkillCheck";
+import SkillCheckResultDisplay from "./components/SkillCheckResultDisplay";
 
 function App() {
   const [characters, setCharacters] = useState([initCharacter()]);
@@ -104,29 +105,6 @@ function App() {
     setCharacters(updatedCharacters);
   };
 
-  const SkillCheckResultDisplay = () => {
-    return (
-      skillCheckResult?.rollValue && (
-        <div>
-          <h2>Skill Check Result</h2>
-          <h4>Character: {skillCheckResult.index + 1}</h4>
-          <div>
-            Skill: {skillCheckResult.skill}: {skillCheckResult.skillValue}
-          </div>
-          <div>You Rolled: {skillCheckResult.rollValue}</div>
-          <div>The DC was: {skillCheckResult.DC}</div>
-          <div>
-            Skill Check Result:{" "}
-            {skillCheckResult.skillValue + skillCheckResult.rollValue >=
-            skillCheckResult.DC
-              ? "Successful"
-              : "Failure"}
-          </div>
-        </div>
-      )
-    );
-  };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -150,7 +128,7 @@ function App() {
           Sava All Character
         </button>
 
-        <SkillCheckResultDisplay />
+        <SkillCheckResultDisplay skillCheckResult={skillCheckResult} />
 
         {characters.map((character, index) => (
           <div className="row mt-5" key={index}>
